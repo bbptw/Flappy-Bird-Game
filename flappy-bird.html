@@ -3,32 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Easy Flappy Bird - High Score Challenge</title>
+    <title>Flappy Bird - Play Now!</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
         }
         
         body {
-            font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            min-height: 100vh;
+        }
+        
+        #header {
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            background-color: #2a7f8f;
+            color: white;
+        }
+        
+        #ad-top {
+            width: 100%;
+            max-width: 500px;
+            height: 90px;
+            margin: 10px 0;
+            background-color: #f8f8f8;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #4ec0ca;
             overflow: hidden;
-            touch-action: manipulation;
+        }
+        
+        #game-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
         }
         
         #game-container {
             position: relative;
             width: 100%;
-            max-width: 400px;
-            height: 600px;
+            height: 500px;
             overflow: hidden;
             background-color: #4ec0ca;
+        }
+        
+        #ad-bottom {
+            width: 100%;
+            max-width: 500px;
+            height: 90px;
+            margin: 10px 0;
+            background-color: #f8f8f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
         
         #background {
@@ -179,6 +214,14 @@
             line-height: 1.5;
         }
         
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 15px;
+            background-color: #2a7f8f;
+            color: white;
+        }
+        
         @keyframes scrollBackground {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -196,36 +239,75 @@
         }
         
         @media (max-width: 500px) {
-            #game-container { height: 500px; }
+            #game-container { height: 400px; }
             #score-display { font-size: 30px; }
             #start-title, #final-score { font-size: 36px; }
             #high-score { font-size: 28px; }
+            #ad-top, #ad-bottom { height: 70px; }
         }
     </style>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-8011039531159923/6435158201" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="game-container">
-        <div id="background"></div>
-        <div id="bird"></div>
-        
-        <div id="score-container">
-            <div id="score-display">0</div>
-        </div>
-        
-        <div id="game-over">
-            <div id="final-score">Score: 0</div>
-            <div id="high-score">High Score: 0</div>
-            <button id="restart-btn">Play Again</button>
-        </div>
-        
-        <div id="start-screen">
-            <div id="start-title">Flappy Bird</div>
-            <button id="start-btn">Start Game</button>
-            <div id="controls">
-                Tap or press Space/Up Arrow to jump
+    <div id="header">
+        <h1>Flappy Bird</h1>
+    </div>
+    
+    <!-- Top Ad Unit -->
+    <div id="ad-top">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-app-pub-8011039531159923/6435158201"
+             data-ad-slot="YOUR_TOP_AD_SLOT"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    
+    <div id="game-wrapper">
+        <div id="game-container">
+            <div id="background"></div>
+            <div id="bird"></div>
+            
+            <div id="score-container">
+                <div id="score-display">0</div>
+            </div>
+            
+            <div id="game-over">
+                <div id="final-score">Score: 0</div>
+                <div id="high-score">High Score: 0</div>
+                <button id="restart-btn">Play Again</button>
+            </div>
+            
+            <div id="start-screen">
+                <div id="start-title">Flappy Bird</div>
+                <button id="start-btn">Start Game</button>
+                <div id="controls">
+                    Tap or press Space/Up Arrow to jump
+                </div>
             </div>
         </div>
     </div>
+    
+    <!-- Bottom Ad Unit -->
+    <div id="ad-bottom">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-app-pub-8011039531159923/7274840425"
+             data-ad-slot="YOUR_BOTTOM_AD_SLOT"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 Flappy Bird Game | All Rights Reserved</p>
+    </footer>
 
     <audio id="flap-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-bird-flapping-1489.mp3" preload="auto"></audio>
     <audio id="score-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3" preload="auto"></audio>
@@ -237,21 +319,21 @@
             bird: {
                 width: 50,
                 height: 35,
-                gravity: 0.4,  // Reduced gravity for easier gameplay
-                jumpForce: -8,   // Reduced jump force for smoother control
+                gravity: 0.4,
+                jumpForce: -8,
                 rotationSpeed: 4,
                 maxRotation: 30
             },
             pipes: {
                 width: 70,
-                gap: 220,        // Wider gap for easier play
+                gap: 220,
                 minGap: 200,
-                frequency: 2200, // Slower pipe generation
-                speed: 1.8,      // Slower game speed
+                frequency: 2200,
+                speed: 1.8,
                 maxSpeed: 3
             },
             game: {
-                difficultyInterval: 7, // Less frequent difficulty increases
+                difficultyInterval: 7,
                 speedIncrease: 0.15,
                 gapDecrease: 3
             }
@@ -568,13 +650,6 @@
         
         // Initialize the game when page loads
         window.onload = init;
-        
-        // Pause game when tab is inactive
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden && isGameStarted && !isGameOver) {
-                // You could add a pause feature here if desired
-            }
-        });
     </script>
 </body>
 </html>
